@@ -6,9 +6,8 @@ metadata:
 spec:
   selector:
     app: mongo-express
-  type: LoadBalancer #External
+  type: ClusterIP #External
   ports:
   - protocol: TCP
-    port: 80 ## Service port. Not the port of the actual application but this service can be anything
+    port: 80 #this is port of the service. So anything pointing to this service should use 80
     targetPort: 8081
-    nodePort: 30001 ##Connect from browser
