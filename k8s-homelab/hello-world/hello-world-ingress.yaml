@@ -5,10 +5,10 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: hello-world.example
+    - host: vr.myapp.com
       http:
         paths:
-          - path: /
+          - path: /helloWorld
             pathType: Prefix
             backend:
               service:
