@@ -3,15 +3,18 @@ kind: Ingress
 metadata:
   name: mongo-express-deployment-ingress
   namespace: mongodb
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2 #Need to add this or else the name gets resolved incorrectly. URL rewrite is necessary.
 spec:
   rules:
   - host: vr.myapp.com
     http:
       paths:
-      - path: /mongoExpress
+      #- path: /mongoExpress(/|$)(.*)
+      - path: /
         pathType: Prefix
         backend:
           service:
             name: mongo-express-service
             port:
-              number: 80 #port of the service mongo-express-service. Which then redirects to its own target port.
+              number: 9091 #port of the service mongo-express-service. Which then redirects to its own target port.

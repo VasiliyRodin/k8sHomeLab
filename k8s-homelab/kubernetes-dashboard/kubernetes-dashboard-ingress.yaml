@@ -3,15 +3,17 @@ kind: Ingress
 metadata:
   name: kubernetes-dashboard-ingress
   namespace: kubernetes-dashboard
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2 #Need to add this or else the name gets resolved incorrectly. URL rewrite is necessary.
 spec:
   rules:
-  - host: vr.myapp.com
-    http:
-      paths:
-      - path: /dashboard
-        pathType: Prefix
-        backend:
-          service:
-            name: kubernetes-dashboard
-            port:
-              number: 80
+    - host: vr.myapp.com
+      http:
+        paths:
+        - path: /dashboard(/|$)(.*)
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: kubernetes-dashboard
+              port:
+                number: 80
