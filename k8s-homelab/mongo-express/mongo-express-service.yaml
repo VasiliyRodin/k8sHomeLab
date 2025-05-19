@@ -6,7 +6,7 @@ metadata:
 spec:
   selector:
     app: mongo-express
-  type: ClusterIP #External
+  type: ClusterIP #internal
   ports:
   - protocol: TCP
     port: 80 #this is port of the service. So anything pointing to this service should use 80
