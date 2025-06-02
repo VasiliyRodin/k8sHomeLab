@@ -15,9 +15,16 @@ spec:
       labels:
         app: mongodb
     spec:
+      volumes:
+        - name: mongodb-volume
+          persistentVolumeClaim: 
+            claimName: mongodb-pvc
       containers:
         - name: my-mongodb-pod
           image: mongo
+          volumeMounts:
+          - name: mongodb-volume
+            mountPath: /data/db
           ports:
           - containerPort: 27017
           env:
